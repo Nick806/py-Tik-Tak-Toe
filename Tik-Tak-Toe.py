@@ -22,50 +22,56 @@ Array [3][3]
 """
 
 
-"""
-def print_table(table):
-    string = ""
-    for row in table:
-        for element in row:
-            if element == None:
-                string += " "
-            else:
-                string += element
-            string += " "
-        string += "\n"
-    print(string)
+import pygame
+pygame.init()
 
+# Set up the display
+screen_dimention = 333
+screen = pygame.display.set_mode((screen_dimention, screen_dimention))
+pygame.display.set_caption("My Pygame Base")
 
-def center_of(table):
-    return table[1][1]
+def draw_tic_tac_toe_table(screen):
+    # Imposta i colori
+    BLACK = (0, 0, 0)
+    WHITE = (255, 255, 255)
 
+    # Dimensioni della tabella
+    cell_size = screen_dimention/3
+    num_rows = 3
+    num_columns = 3
 
+    # Disegna la griglia
+    for row in range(num_rows):
+        for col in range(num_columns):
+            rect_x = col * cell_size
+            rect_y = row * cell_size
+            pygame.draw.rect(screen, BLACK, (rect_x, rect_y, cell_size, cell_size), 2)
 
-game1 = [["X", None, "O"],
-         ["O", "X", "X"],
-         ["X", "O", "O"]]
+x = 0
+y = 0
+# Main game loop
+running = True
+while running:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+        if event.type == pygame.MOUSEBUTTONDOWN:
+           print("Ciao") 
 
+    # Your game logic goes here
+    x, y = pygame.mouse.get_pos()
+    # Clear the screen
+    screen.fill((255, 255, 255))
 
-#print(game1[0][0])
+    draw_tic_tac_toe_table(screen)
 
-#print_table(game1)
+    # Draw items on the screen
+    # Example: pygame.draw.rect(screen, (255, 0, 0), pygame.Rect(100, 100, 50, 50))
+    #pygame.draw.rect(screen, (255, 255, 0), pygame.Rect(x, y, 50, 50))
 
-x = center_of(game1)
-print(x)"""
+    #x+=0.1
+    #if x>255:x=0
 
-# 0 1 1 2 3 5 8 13
-z = 0
-x = 0 
-y = 1
+    pygame.display.flip()
 
-print(x)
-print(y)
-
-while True:
-    z = x + y 
-    print(z)
-    x = y
-    y = z
-    
-
-
+pygame.quit()
